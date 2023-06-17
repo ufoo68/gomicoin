@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cb:CODEBLOCKS editor-version="v1.3.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://education.mit.edu/openblocks/ns http://education.mit.edu/openblocks/codeblocks.xsd" xmlns:cb="http://education.mit.edu/openblocks/ns">
+<Pages collapsible-pages="yes">
+<Page page-color="250 250 250" page-infullview="yes" page-name="." page-width="1920">
+<PageBlocks>
+<Block genus-name="loop" id="108">
+<Location>
+<X>32</X>
+<Y>27</Y>
+</Location>
+<Sockets num-sockets="2">
+<BlockConnector con-block-id="109" connector-kind="socket" connector-type="board-type" init-type="board-type" label="スクーミー" position-type="single"/>
+<BlockConnector con-block-id="110" connector-kind="socket" connector-type="cmd" init-type="cmd" label="動く" position-type="single"/>
+</Sockets>
+</Block>
+<Block genus-name="wifi_conf" id="110">
+<Location>
+<X>197</X>
+<Y>59</Y>
+</Location>
+<BeforeBlockId>108</BeforeBlockId>
+<AfterBlockId>114</AfterBlockId>
+<Sockets num-sockets="4">
+<BlockConnector con-block-id="111" connector-kind="socket" connector-type="string" init-type="string" label="SSID" position-type="single"/>
+<BlockConnector con-block-id="112" connector-kind="socket" connector-type="string" init-type="string" label="パスワード" position-type="single"/>
+<BlockConnector con-block-id="113" connector-kind="socket" connector-type="string" init-type="string" label="APIキー" position-type="single"/>
+<BlockConnector con-block-id="123" connector-kind="socket" connector-type="cmd" init-type="cmd" label="パラメーター" position-type="single"/>
+</Sockets>
+</Block>
+<Block genus-name="spreadsheet_control_api" id="114">
+<Location>
+<X>197</X>
+<Y>179</Y>
+</Location>
+<BeforeBlockId>110</BeforeBlockId>
+<Sockets num-sockets="4">
+<BlockConnector con-block-id="115" connector-kind="socket" connector-type="string" init-type="string" label="記録設定" position-type="single"/>
+<BlockConnector con-block-id="116" connector-kind="socket" connector-type="string" init-type="string" label="記録間隔" position-type="single"/>
+<BlockConnector con-block-id="117" connector-kind="socket" connector-type="string" init-type="string" label="センサー1" position-type="single"/>
+<BlockConnector con-block-id="118" connector-kind="socket" connector-type="string" init-type="string" label="センサー2" position-type="single"/>
+</Sockets>
+</Block>
+<Block genus-name="spreadsheet_sensing_data2" id="118">
+<Label>圧力</Label>
+<Location>
+<X>385</X>
+<Y>311</Y>
+</Location>
+<Plug>
+<BlockConnector con-block-id="114" connector-kind="plug" connector-type="string" init-type="string" label="" position-type="single"/>
+</Plug>
+<Sockets num-sockets="1">
+<BlockConnector con-block-id="121" connector-kind="socket" connector-type="number" init-type="number" label="" position-type="single"/>
+</Sockets>
+</Block>
+<Block genus-name="pressure_sensor" id="121">
+<Location>
+<X>427</X>
+<Y>311</Y>
+</Location>
+<Plug>
+<BlockConnector con-block-id="118" connector-kind="plug" connector-type="number" init-type="number" label="" position-type="single"/>
+</Plug>
+<Sockets num-sockets="1">
+<BlockConnector con-block-id="122" connector-kind="socket" connector-type="number" init-type="number" label="場所" position-type="single"/>
+</Sockets>
+</Block>
+<Block genus-name="pinListAnalog_A1" id="122">
+<Location>
+<X>553</X>
+<Y>311</Y>
+</Location>
+<Plug>
+<BlockConnector con-block-id="121" connector-kind="plug" connector-type="number" init-type="number" label="" position-type="single"/>
+</Plug>
+</Block>
+<Block genus-name="spreadsheet_sensing_data1" id="117">
+<Label>距離</Label>
+<Location>
+<X>385</X>
+<Y>230</Y>
+</Location>
+<Plug>
+<BlockConnector con-block-id="114" connector-kind="plug" connector-type="string" init-type="string" label="" position-type="single"/>
+</Plug>
+<Sockets num-sockets="1">
+<BlockConnector con-block-id="119" connector-kind="socket" connector-type="number" init-type="number" label="" position-type="single"/>
+</Sockets>
+</Block>
+<Block genus-name="distance_sensor" id="119">
+<Location>
+<X>427</X>
+<Y>230</Y>
+</Location>
+<Plug>
+<BlockConnector con-block-id="117" connector-kind="plug" connector-type="number" init-type="number" label="cm" position-type="single"/>
+</Plug>
+<Sockets num-sockets="1">
+<BlockConnector con-block-id="120" connector-kind="socket" connector-type="number" init-type="number" label="場所" position-type="single"/>
+</Sockets>
+</Block>
+<Block genus-name="pinListDigital_D18" id="120">
+<Location>
+<X>589</X>
+<Y>230</Y>
+</Location>
+<Plug>
+<BlockConnector con-block-id="119" connector-kind="plug" connector-type="number" init-type="number" label="" position-type="single"/>
+</Plug>
+</Block>
+<Block genus-name="type_interval_10_sec" id="116">
+<Location>
+<X>385</X>
+<Y>206</Y>
+</Location>
+<Plug>
+<BlockConnector con-block-id="114" connector-kind="plug" connector-type="string" init-type="string" label="" position-type="bottom"/>
+</Plug>
+</Block>
+<Block genus-name="type_setting_overwriting" id="115">
+<Location>
+<X>385</X>
+<Y>182</Y>
+</Location>
+<Plug>
+<BlockConnector con-block-id="114" connector-kind="plug" connector-type="string" init-type="string" label="" position-type="bottom"/>
+</Plug>
+</Block>
+<Block genus-name="wifi_additional_parameter" id="123">
+<Location>
+<X>366</X>
+<Y>139</Y>
+</Location>
+<BeforeBlockId>110</BeforeBlockId>
+<Sockets num-sockets="1">
+<BlockConnector con-block-id="124" connector-kind="socket" connector-type="string" init-type="string" label="" position-type="single"/>
+</Sockets>
+</Block>
+<Block genus-name="email_address_conf" id="124">
+<Location>
+<X>410</X>
+<Y>142</Y>
+</Location>
+<Plug>
+<BlockConnector con-block-id="123" connector-kind="plug" connector-type="string" init-type="string" label="" position-type="bottom"/>
+</Plug>
+<Sockets num-sockets="1">
+<BlockConnector con-block-id="125" connector-kind="socket" connector-type="string" init-type="string" label="" position-type="single"/>
+</Sockets>
+</Block>
+<Block genus-name="additional_parameter" id="125">
+<Label>*</Label>
+<Location>
+<X>506</X>
+<Y>142</Y>
+</Location>
+<Plug>
+<BlockConnector con-block-id="124" connector-kind="plug" connector-type="string" init-type="string" label="" position-type="bottom"/>
+</Plug>
+</Block>
+<Block genus-name="api_key" id="113">
+<Label>*</Label>
+<Location>
+<X>369</X>
+<Y>110</Y>
+</Location>
+<Plug>
+<BlockConnector con-block-id="110" connector-kind="plug" connector-type="string" init-type="string" label="" position-type="bottom"/>
+</Plug>
+</Block>
+<Block genus-name="wifi_pass" id="112">
+<Label>*</Label>
+<Location>
+<X>369</X>
+<Y>86</Y>
+</Location>
+<Plug>
+<BlockConnector con-block-id="110" connector-kind="plug" connector-type="string" init-type="string" label="" position-type="bottom"/>
+</Plug>
+</Block>
+<Block genus-name="wifi_ssid" id="111">
+<Label>*</Label>
+<Location>
+<X>369</X>
+<Y>62</Y>
+</Location>
+<Plug>
+<BlockConnector con-block-id="110" connector-kind="plug" connector-type="string" init-type="string" label="" position-type="bottom"/>
+</Plug>
+</Block>
+<Block genus-name="board_iot" id="109">
+<Location>
+<X>200</X>
+<Y>30</Y>
+</Location>
+<Plug>
+<BlockConnector con-block-id="108" connector-kind="plug" connector-type="board-type" init-type="board-type" label="" position-type="single"/>
+</Plug>
+</Block>
+</PageBlocks>
+</Page>
+</Pages>
+</cb:CODEBLOCKS>
