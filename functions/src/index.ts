@@ -12,12 +12,15 @@ const spreadsheetId = process.env.SHEET_ID;
 
 const getDeviceState = async (
   deviceId: string
-): Promise<{
-  deviceId: string;
-  timestamp: Date;
-  distance: number;
-  pressure: number;
-} | undefined> => {
+): Promise<
+  | {
+      deviceId: string;
+      capacity: number;
+      trash: "start" | "end" | "wait";
+      timestamp: Date;
+    }
+  | undefined
+> => {
   try {
     const sheets = google.sheets({ version: "v4", auth });
     const res = await sheets.spreadsheets.values.get({
@@ -29,8 +32,8 @@ const getDeviceState = async (
     const devices = body.map((row) => {
       return {
         deviceId: row[0],
-        distance: Number(row[2]),
-        pressure: Number(row[3]),
+        capacity: Number(row[1]),
+        trash: row[2] as "start" | "end" | "wait",
         timestamp: new Date(row[4]),
       };
     });
