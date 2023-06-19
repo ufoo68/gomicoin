@@ -34,7 +34,7 @@ const getDeviceState = async (
         deviceId: row[0],
         capacity: Number(row[1]),
         trash: row[2] as "start" | "end" | "wait",
-        timestamp: new Date(row[4]),
+        timestamp: new Date(row[3]),
       };
     });
     return devices.find((d) => d.deviceId === deviceId);
