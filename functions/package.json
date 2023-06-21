@@ -15,6 +15,7 @@
   },
   "main": "lib/index.js",
   "dependencies": {
+    "@line/lbd-sdk-js": "^1.4.7",
     "dayjs": "^1.11.8",
     "firebase-admin": "^11.8.0",
     "firebase-functions": "^4.3.1",
