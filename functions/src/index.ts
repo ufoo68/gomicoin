@@ -3,9 +3,9 @@ import { onRequest } from "firebase-functions/v2/https";
 import { getDeviceConfig, getDeviceState } from "./gomibakodb";
 
 import dayjs = require("dayjs");
-import { requestGomiToken } from "./gomitoken";
+import { getGomiToken, requestGomiToken } from "./gomitoken";
 
-export const gomiMonitor = onRequest(async (req, response) => {
+export const getGomibakoState = onRequest(async (req, response) => {
   const deviceId = req.query.deviceId as string;
   if (!deviceId) {
     response.status(400).send("Bad Request");
@@ -20,6 +20,21 @@ export const gomiMonitor = onRequest(async (req, response) => {
     ...data,
     timestamp: dayjs(data.timestamp).toISOString(),
   });
+});
+
+export const getGomicoin = onRequest(async (req, response) => {
+  const deviceId = req.query.deviceId as string;
+  if (!deviceId) {
+    response.status(400).send("Bad Request");
+    return;
+  }
+  const config = await getDeviceConfig(deviceId);
+  if (!config) {
+    response.status(404).send("Not Found");
+    return;
+  }
+  const gomitoken = await getGomiToken(config.lineUserId);
+  response.send(gomitoken);
 });
 
 export const publishGomiToken = onRequest(async (req, response) => {

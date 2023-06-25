@@ -52,6 +52,7 @@ export const getDeviceConfig = async (
       schoomySheetId: string;
       schoomySheetName: string;
       walletAddress: string;
+      lineUserId: string;
     }
   | undefined
 > => {
@@ -71,6 +72,7 @@ export const getDeviceConfig = async (
         schoomySheetId: row[3],
         schoomySheetName: row[4],
         walletAddress: row[5],
+        lineUserId: row[6],
       };
     });
     return devices.find((d) => d.deviceId === deviceId);
