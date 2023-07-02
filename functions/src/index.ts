@@ -1,6 +1,10 @@
 import { onRequest } from "firebase-functions/v2/https";
 
-import { getDeviceConfig, getDeviceState } from "./gomibakodb";
+import {
+  getDeviceConfig,
+  getDeviceConfigs,
+  getDeviceState,
+} from "./gomibakodb";
 
 import dayjs = require("dayjs");
 import { getGomiToken, requestGomiToken } from "./gomitoken";
@@ -54,4 +58,9 @@ export const publishGomiToken = onRequest(async (req, response) => {
   response.send({
     txHash,
   });
+});
+
+export const getDevices = onRequest(async (req, response) => {
+  const configs = await getDeviceConfigs();
+  response.send(configs);
 });

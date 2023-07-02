@@ -1,22 +1,34 @@
-import axios from "axios";
 import Obniz from "obniz";
+import { getDeviceStatus, getDevices, getGomiToken } from "./client";
 
-const obniz = new Obniz.M5StickC("8913-2309", {
-
-});
-obniz.onconnect = () => {
-  obniz.buttonA.onchange = (state) => {
-    if (state) {
-      axios.get("https://getgomibakostate-acxb6r4szq-uc.a.run.app?deviceId=test_1")
-        .then((response) => {
-          obniz.display.clear();
-          // eslint-disable-next-line max-len
-          obniz.display.print(`capacity: ${(response.data.capacity * 100).toFixed(2)}%`);
-        }).catch((error) => {
-          console.error(error);
-          obniz.display.clear();
-          obniz.display.print("error");
-        });
-    }
-  };
+const main = async () => {
+  const devices = await getDevices();
+  devices.forEach((device) => {
+    const obniz = new Obniz.M5StickC(device.obnizId);
+    obniz.onconnect = () => {
+      console.log("connected: " + obniz.id);
+      obniz.buttonA.onchange = async (state) => {
+        if (state) {
+          try {
+            const deviceState = await getDeviceStatus(device.deviceId);
+            const gomiToken = await getGomiToken(device.deviceId);
+            obniz.display.clear();
+            obniz.display.print(
+              `\ncapacity: ${(deviceState.capacity * 100).toFixed(
+                2
+              )}%\ntrash: ${deviceState.trash}\n${gomiToken.symbol}: ${
+                gomiToken.amount
+              }`
+            );
+          } catch (error) {
+            console.error(error);
+            obniz.display.clear();
+            obniz.display.print("error");
+          }
+        }
+      };
+    };
+  });
 };
+
+main();

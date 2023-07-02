@@ -8,15 +8,28 @@ const auth = new google.auth.GoogleAuth({
 
 const spreadsheetId = process.env.DB_SHEET_ID;
 
+type DeviceConfig = {
+  deviceId: string;
+  initialDistance: number;
+  initialPressure: number;
+  schoomySheetId: string;
+  schoomySheetName: string;
+  walletAddress: string;
+  lineUserId: string;
+  obnizId: string;
+};
+
+type DeviceState = {
+  deviceId: string;
+  capacity: number;
+  trash: "start" | "end" | "wait";
+  timestamp: Date;
+};
+
 export const getDeviceState = async (
   deviceId: string
 ): Promise<
-  | {
-      deviceId: string;
-      capacity: number;
-      trash: "start" | "end" | "wait";
-      timestamp: Date;
-    }
+  | DeviceState
   | undefined
 > => {
   try {
@@ -42,19 +55,8 @@ export const getDeviceState = async (
   }
 };
 
-export const getDeviceConfig = async (
-  deviceId: string
-): Promise<
-  | {
-      deviceId: string;
-      initialDistance: number;
-      initialPressure: number;
-      schoomySheetId: string;
-      schoomySheetName: string;
-      walletAddress: string;
-      lineUserId: string;
-    }
-  | undefined
+export const getDeviceConfigs = async (): Promise<
+  DeviceConfig[]
 > => {
   try {
     const sheets = google.sheets({ version: "v4", auth });
@@ -64,7 +66,7 @@ export const getDeviceConfig = async (
     });
     const data = res?.data?.values ?? [];
     const body = data.slice(1);
-    const devices = body.map((row) => {
+    return body.map((row) => {
       return {
         deviceId: row[0],
         initialDistance: Number(row[1]),
@@ -73,8 +75,20 @@ export const getDeviceConfig = async (
         schoomySheetName: row[4],
         walletAddress: row[5],
         lineUserId: row[6],
+        obnizId: row[7],
       };
     });
+  } catch (error) {
+    logger.error(error);
+    return [];
+  }
+};
+
+export const getDeviceConfig = async (
+  deviceId: string
+): Promise<DeviceConfig | undefined> => {
+  try {
+    const devices = await getDeviceConfigs();
     return devices.find((d) => d.deviceId === deviceId);
   } catch (error) {
     logger.error(error);

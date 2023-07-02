@@ -10,6 +10,12 @@ const walletSecret = process.env.BC_WALLET_SECRET ?? "";
 
 const httpClient = new devSdk.HttpClient(baseUrl, apiKey, apiSecret);
 
+type GomiToken = {
+  symbol: string;
+  imgUri: string;
+  amount: number;
+};
+
 export const requestGomiToken = async (
   targetAddress: string,
   amount: number
@@ -32,7 +38,7 @@ export const requestGomiToken = async (
 
 export const getGomiToken = async (
   userId: string
-): Promise<{ symbol: string; imgUri: string; amount: number }> => {
+): Promise<GomiToken> => {
   try {
     const response = await httpClient.serviceTokenBalanceOfUser(
       userId,
