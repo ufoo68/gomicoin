@@ -22,7 +22,7 @@ type DeviceConfig = {
 type DeviceState = {
   deviceId: string;
   capacity: number;
-  trash: "start" | "end" | "wait";
+  trash: "start" | "end" | "wait" | "open";
   timestamp: Date;
 };
 
