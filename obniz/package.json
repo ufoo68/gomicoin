@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.4.0",
     "obniz": "^3.26.0",
     "ts-dotenv": "^0.9.1",
     "ts-node": "^10.9.1",

@@ -1,4 +1,5 @@
 import { load } from "ts-dotenv";
+import axios from "axios";
 
 const env = load({
   GET_DEVICES_URL: String,
@@ -31,23 +32,25 @@ type GomiToken = {
 };
 
 export const getDevices = async (): Promise<DeviceConfig[]> => {
-  const response = await fetch(env.GET_DEVICES_URL);
-  const json = await response.json();
+  const response = await axios.get(env.GET_DEVICES_URL);
+  const json = await response.data;
   return json;
 };
 
 export const getDeviceStatus = async (
   deviceId: string
 ): Promise<DeviceState> => {
-  const response = await fetch(
+  const response = await axios.get(
     `${env.GET_DEVICE_STATUS_URL}?deviceId=${deviceId}`
   );
-  const json = await response.json();
+  const json = await response.data;
   return json;
 };
 
 export const getGomiToken = async (deviceId: string): Promise<GomiToken> => {
-  const response = await fetch(`${env.GET_GOMICOIN_URL}?deviceId=${deviceId}`);
-  const json = await response.json();
+  const response = await axios.get(
+    `${env.GET_GOMICOIN_URL}?deviceId=${deviceId}`
+  );
+  const json = await response.data;
   return json;
 };
