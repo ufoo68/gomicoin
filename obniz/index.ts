@@ -22,7 +22,7 @@ const main = async () => {
           obniz.display.clear();
           obniz.display.print("error");
         }
-      }, 10000);
+      }, 5000);
     };
   });
 };
