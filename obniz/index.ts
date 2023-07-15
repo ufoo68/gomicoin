@@ -18,18 +18,9 @@ const main = async () => {
     const obniz = new Obniz.M5StickC(device.obnizId);
     obniz.onconnect = () => {
       console.log("connected: " + obniz.id);
-      displayState(obniz, device.deviceId);
-      obniz.buttonA.onchange = async (state) => {
-        if (state) {
-          try {
-            displayState(obniz, device.deviceId);
-          } catch (error) {
-            console.error(error);
-            obniz.display.clear();
-            obniz.display.print("error");
-          }
-        }
-      };
+      setInterval(async () => {
+        await displayState(obniz, device.deviceId);
+      }, 10000);
     };
   });
 };
